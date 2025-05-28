@@ -1,0 +1,59 @@
+﻿@model LoanModel
+
+<form method="post" asp-controller="Loan" asp-action="GetLoaner">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Welcome to the loan Creation Page</h2>
+            <h3 class="text-primary">Hi there. I am Loaner, Your home loan digital assistance :D</h3>
+            <hr/>
+        </div>
+        <!--add Validations here 
+
+        <div asp-validation-summary="All"></div>
+        
+        -->
+
+
+        <div class="mb-3">
+            @if (Model == null)
+            {
+
+                <div class="mb-3">
+                    <label>Please Enter Your name</label>
+                    <input id="nameInput" asp-for="Name" class="form-control"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div><div class="mb-3">
+                    <label>Please Enter Your Surname</label>
+                    <input id="surnameInput" asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Enter Your Gross Salary:</label>   
+                    <input asp-for="GrossSalary" class="form-control" />
+                    <span asp-validation-for="GrossSalary" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Now enter your credit score(0-1200): </label>
+                    <input asp-for="CreditScore" class="form-control" />
+                    <span asp-validation-for="CreditScore" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label>What is the purchase price of the property?: </label>           
+                    <input asp-for="PriceOfProperty" class="form-control" />
+                    <span asp-validation-for="PriceOfProperty" class="text-danger"></span>
+                </div>
+            }
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Make Loan</button>
+
+        <a asp-controller="Loan" asp-action="LoanView" class="btn btn-secondary" style="width:150px">Back </a>
+    </div>
+    </div>
+</form>
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+    
+}

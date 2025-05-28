@@ -1,0 +1,91 @@
+﻿@model List<Cases> 
+
+<body>
+
+<h1>Showing Cases Managers</h1>
+<br />
+<br />
+
+<div class="card rounded-3 me-1g-n5 border p-3 mt-4 bg-blur bg-secondary bg-opacity-75 shadow p-3">
+    <table class="table-bordered border border-dark">
+        <thead>
+            <tr>
+                <th>Suspect Number</th>
+                <th>Suspect ID</th>
+                <th>Suspect Name</th>
+                <th>Offence </th>
+                <th>Manager Name</th>
+                <th>Manager ID</th>
+                <th>Manager Number</th>
+            </tr>
+        </thead>
+        <tbody>
+           @*  @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+                    for (int i = 0; i < item.CriminalRecords.Count(); i++)
+                    {
+                        var crim = item.CriminalRecords[i];
+                        var man = item.ManagerList.ElementAtOrDefault(i);
+                        var sus = item.Suspects.ElementAtOrDefault(i);
+
+                        <tr>
+                            <td>@sus.SuspectNo</td>
+                            <td>@sus.SuspectID</td>
+                            <td>@sus.FirstName</td>
+                            <td>@(crim != null ? crim.Offences : "")</td>
+                            <td>@(man != null ? man.Name : "")</td>
+                            <td>@(man != null ? man.ManagerID : "")</td>
+                            <td>@(man != null ? man.ManagerNo : "")</td>
+                        </tr>
+                    }
+                } *@
+            @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+                    foreach (var crim in item.CriminalRecords)
+                    {
+                        var man = item.ManagerList.FirstOrDefault(m => m.ManagerNo == crim.ManagerNoForeign);
+                        var sus = item.Suspects.FirstOrDefault(s => s.SuspectNo == crim.SuspectNo);
+
+                        <tr>
+                            <td>@sus?.SuspectNo</td>
+                            <td>@sus?.SuspectID</td>
+                            <td>@sus?.FirstName</td>
+                            <td>@crim.Offences</td>
+                            <td>@man?.Name</td>
+                            <td>@man?.ManagerID</td>
+                            <td>@man?.ManagerNo</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                    <tr>
+                        <td>No Case to show</td>
+                        <td>No Case to show</td>
+                        <td>No Case to show</td>
+                        <td>No case to show</td>
+                        <td>No case to show</td>
+                        <td>No case to show</td>
+                        <td>No case to show</td>
+                    </tr>
+                }
+            }
+
+
+
+               
+            
+
+        
+                
+            
+        </tbody>
+    </table>
+    </div>
+
+</body>

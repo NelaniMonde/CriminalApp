@@ -1,0 +1,120 @@
+ public LoanModel UtilityMethod(LoanModel loanObj)
+        {
+            float maximumInst = 0;
+            float loanGranted = 0;
+            float deposite = 0;
+            float monthlyInstall = 0;
+            
+            
+
+            //100% loan
+            if (loanObj.CreditScore >= 800)
+            {
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                loanObj.LoanStatus = "Granted";
+                loanGranted = loanGrantedCal(100);
+
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty,loanObj.GrossSalary,loanObj.LoanGranted);
+
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (0.00785f);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+            //97.5 loan
+            else if (loanObj.CreditScore >= 750 && loanObj.CreditScore <= 799)
+            {
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+                loanObj.LoanStatus = "Granted";
+                loanObj.LoanGranted = (float)((double)97.5 / 100);
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty, loanObj.GrossSalary, loanObj.LoanGranted);
+
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (float) (0.00785);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+            //95% loan
+            else if (loanObj.CreditScore >= 700 && loanObj.CreditScore <= 749)
+            {
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+
+                loanObj.LoanStatus = "Granted";
+                
+                loanObj.LoanGranted = (float)((double)95 / 100);
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty, loanObj.GrossSalary, loanObj.LoanGranted);
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (0.00785f);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+
+            //90% loan
+            else if (loanObj.CreditScore >= 650 && loanObj.CreditScore <= 699)
+            {
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+                loanObj.LoanStatus = "Granted";
+                loanObj.LoanGranted =(float)((double) 90/ 100);
+
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty, loanObj.GrossSalary, loanObj.LoanGranted);
+
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (0.00785f);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+            //85% loan
+            else if (loanObj.CreditScore >= 600 && loanObj.CreditScore <= 649)
+            {
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+                loanObj.LoanStatus = "Granted";
+                loanObj.LoanGranted = 85 / 100;
+
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty, loanObj.GrossSalary, loanObj.LoanGranted);
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (0.00785f);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+            //80% loan
+            else if (loanObj.CreditScore >= 550 && loanObj.CreditScore <= 599)
+            {
+                //loanObj.MaximumInstalment = loanObj.GrossSalary * 30 / 100;
+                maximumInst = MaximumInstalCal(loanObj.GrossSalary);
+
+                loanObj.LoanStatus = "Granted";
+                loanObj.LoanGranted = 80 / 100;
+                //loanObj.DepositeRequired = loanObj.PriceOfProperty - (loanObj.GrossSalary * loanObj.LoanGranted);
+                deposite = DepositeReqCal(loanObj.PriceOfProperty, loanObj.GrossSalary, loanObj.LoanGranted);
+                //loanObj.MonthlyInstalment = (loanObj.PriceOfProperty - loanObj.DepositeRequired) * (0.00785f);
+                monthlyInstall = MonthlyInstalCal(loanObj.PriceOfProperty, deposite);
+            }
+            //No loan
+            else if (loanObj.CreditScore <= 549)
+            {
+                loanObj.MaximumInstalment = 0;
+                loanObj.LoanStatus = "Rejected";
+                loanObj.LoanGranted = 0;
+                loanObj.DepositeRequired = 0;
+                loanObj.MonthlyInstalment = 0;
+            }
+
+            loanObj = new LoanModel
+            {
+                ID = loanObj.ID,
+                Name = loanObj.Name,
+                Surname = loanObj.Surname,
+                GrossSalary = loanObj.GrossSalary,
+                CreditScore = loanObj.CreditScore,
+                PriceOfProperty = loanObj.PriceOfProperty,
+                LoanStatus = loanObj.LoanStatus,
+                MaximumInstalment = maximumInst,
+                DepositeRequired = deposite,
+                MonthlyInstalment = monthlyInstall
+
+
+            };
+
+            return loanObj;
+
+        }

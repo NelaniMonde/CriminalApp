@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CriminalProject</title>
+    <title>@ViewData["Title"] - Criminal Offence Capturer</title>
     @* <link rel="stylesheet" href="~/css/slateBoostrapTheme.css"/>  *@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -11,17 +11,14 @@
     <link rel="stylesheet" href="~/CriminalProject.styles.css" asp-append-version="true" />
 </head>
 <body>
- @*    <header style="background-color:white;text-align:center">
-        <h3 style="color:blue">Crime Does Not Pay</h3>
-        <img src="~/images/Saps_logo2.png" style="align-self:center" width="250" height="250" />
-    </header> *@
+
     <header>
-        <nav class="navbar navbar-expand-lg bg-primary" >
+        <nav class="navbar navbar-expand-lg glassBackground" >
             <div class="container-fluid">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/saps_logo3.png" width="50" height="50" alt="Logo" class="navbar-logo">
+                    <img src="~/images/CriminalImage1.jpg" width="50" height="50" alt="Logo" class="navbar-logo">
                     
-                    SAP Interface</a>
+                    </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="color:black;" aria-controls="color:black"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +31,7 @@
                         @if (User.IsInRole(SD.Role_User_NormalUser) || User.IsInRole(SD.Role_User_Manager) || User.IsInRole(SD.Role_User_Admin))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Criminal" asp-action="DashboardView">SAP Dashboard</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Criminal" asp-action="DashboardView">COFS Dashboard</a>
                             </li>
                             <li class="nav-item dropdown text-white">
                                 <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,8 +78,11 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top align-self-lg-baseline footer text-muted">
+    <br />
+    <br />
+    <br />
+    <br />
+    <footer class="border-top align-bottom footer text-muted">
         <div class="container">
             &copy; 2024 - CriminalProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

@@ -14,7 +14,6 @@ namespace CriminalProject.Data
         
         }
 
-      // public DbSet<Managers> Managers { get; set; }
 
 
         public DbSet<UserActivityLog> UserActivityLogs { get; set; }
@@ -23,7 +22,7 @@ namespace CriminalProject.Data
 
         public DbSet<Manager> Managers { get; set; }
 
-       // public DbSet<Cases> Case { get; set; }
+  
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,8 +44,6 @@ namespace CriminalProject.Data
                 .WithOne(a => a.Manager)
                 .HasForeignKey(a => a.ManagerNoForeign)
                 .IsRequired();
-
-
 
         }
 

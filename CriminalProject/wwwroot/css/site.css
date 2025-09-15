@@ -17,12 +17,13 @@ body {
   margin-bottom: 60px;
 }
 
+
+
+
 body {
-   background-image: url('../images/CriminalImage2.jpg');
-
-   background-size:cover;
+    background-image: url('../images/CriminalImage2.jpg');
+    background-size: cover;
 }
-
 
 .glassBackground {
     block-size: fit-content;
@@ -43,3 +44,11 @@ body {
     margin: 2px;
     display: inline-block;
 }
+
+.dropdown-menu li 
+{
+    padding-top: 3px;
+    background: #808080
+}
+
+

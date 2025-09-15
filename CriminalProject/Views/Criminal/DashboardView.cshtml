@@ -1,13 +1,19 @@
 ﻿@model SuspectsNCrimininal
 
 <body>
-<h1>Welcome To The Criminal Dashboard</h1>
-<p class="text-danger">@TempData["ErrorMessage"]</p>
-<br/><br/>
+<h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
+    @if (searchPressed() == true) @* this checks if the model is not null *@
+    {
+        @*if the model is not null meaning the correlating id was found then hide the warning*@
+        <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p>
+    }
+    else
+    {
+        @*otherwise show the warning*@
+        <p class="text-danger glassBackground fw-bold"  style="width:fit-content;">@TempData["ErrorMessage"]</p>
+    }
+    <br/><br/>
 
-@*<a class="btn btn-primary" asp-controller="Criminal" asp-action="SuspectsView">Add Suspects</a>
-<a class="btn btn-primary" asp-controller="Criminal" asp-action="CriminalRecordView">Add New Criminal Record</a>
-*@
 
 @functions
 {
@@ -22,16 +28,16 @@
     <div class="row">
 
         <!--Column 1-->
-        <div class="col-sm">
+        <div class="col-sm glassBackground">
             <div class="input-group mb-3">
                 <form role="search" method="post" asp-controller="Criminal" asp-action="DashboardView">
-                <input type="text" class="form-control" placeholder="Search by ID" name="SusID" />
-                <button class="btn btn-primary" type="submit">Search ID</button>
+                <input type="text" id="textInputlabel" class="form-control glassBackground text-black" placeholder="Search by ID" name="SusID" />
+                <button class="btn btn-primary glassBackground" style="margin-top:1%;" type="submit">Search ID</button>
                 </form>
             </div>
 
     <br /><br />
-    <div>
+    <div class="text-white">
     @if(Model != null)
     {  <table >
         <thead>
@@ -42,7 +48,7 @@
             </thead>
             <tbody>
         <tr>
-        <td>
+        <td >
            Suspect No:  <br /><br />
            Suspect ID:  <br /><br />
            First Name:  <br /><br />
@@ -60,31 +66,30 @@
          else if(searchPressed())
                 {
                     <h1>Welcome To The Criminal Dashboard</h1>
-                    <p class="text-danger">Suspect Not Found</p>
+                    <p class="text-danger" >Suspect Not Found</p>
                 }
     </div>
     <br/><br/><br/><br/>
 
 <div class="row">
-@* <div class="col-1">
-    <label>Edit</label>
-</div> *@
-                <a asp-controller="Criminal" asp-action="UpdateSuspect" asp-route-id="@TempData["FoundSusNo"]" id="ShowAccepted" type="submit" class="btn btn-primary" style="width:200px">Edit Suspect</a>
+
+     <a asp-controller="Criminal" asp-action="UpdateSuspect" asp-route-id="@TempData["FoundSusNo"]" id="ShowAccepted" type="submit" class="btn btn-primary glassBackground" 
+                style="width:fit-content; margin-left:2%;">Edit Suspect</a>
                 
 </div>
 </div><!--end of Column1-->
 
 <!--column 2-->
-<div class="col-sm">
+<div class="col-sm" style="margin-left:2%;">
     <div>
-        <h2 class="align-self-center">Criminal Records</h2>
+        <h2 class="align-self-center text-white glassBackground" style="width:fit-content;">Criminal Records</h2>
     </div>
     <br/><br/>
             <div >
-                <div class="card rounded-3 me-1g-n5 border p-3 mt-4 bg-blur bg-secondary bg-opacity-75 shadow p-3">
+                <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground  p-3">
                     @if (Model != null)
                     {
-                        <table id="MainTable" class="table table-bordered border-dark text-black" @*card rounded-3 border p-3 mt-4 bg-blur bg-secondary bg-opacity-50 text-white" style="width:100%" *@>
+                        <table id="MainTable" class="table table-bordered border-dark text-white" >
                             <thead>
                                 <tr>
                                     <th>Record ID</th>
@@ -142,7 +147,7 @@
                  @if(Model!=null)
                  {
                     <div>
-                        <a asp-controller="Criminal" asp-action="CriminalRecordView" asp-route-SuspectNo="@Model.Suspects.SuspectNo" class="btn btn-primary" style="width:200px">Create Criminal Record</a>
+                        <a asp-controller="Criminal" asp-action="CriminalRecordView" asp-route-SuspectNo="@Model.Suspects.SuspectNo" class="btn btn-primary glassBackground" style="width:fit-content">Create Criminal Record</a>
 
                     </div>
                  }
@@ -155,5 +160,10 @@
             
 
     </div>
-</div>  
+</div> 
+</div>
+</div>
 </body>
+
+
+     

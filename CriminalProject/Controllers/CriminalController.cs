@@ -24,8 +24,12 @@ namespace CriminalProject.Controllers
 
 
         //Dashboard View
-        public IActionResult DashboardView()
+        public IActionResult DashboardView(string availableManagers)
         {
+            if (availableManagers != null)
+            {
+                TempData["ErrorMessage"] = "No Managers Available to create a case";
+            }
 
             return View();
         }
@@ -33,13 +37,15 @@ namespace CriminalProject.Controllers
 
         //Dashboard
         //Search
-        [HttpPost]        
-        public IActionResult DashboardView(string SusID)
+        [HttpPost]
+        [ActionName("DashboardView")]
+        public IActionResult DashboardView2(string SusID )
         {
+
             var suspects = _context.Suspects.ToList();
             var singleValue = 0;
 
-           
+            
             foreach (var sus in suspects)
             {
                 if (sus.SuspectID.Contains(SusID))
@@ -140,7 +146,7 @@ namespace CriminalProject.Controllers
 
         //Criminal Record view
         [HttpGet]
-        public IActionResult CriminalRecordView(int suspectNo)
+        public IActionResult CriminalRecordView(int suspectNo, string viewName)
         {
             // suspectNo =(int) TempData["SuspectNo"];
 
@@ -148,18 +154,25 @@ namespace CriminalProject.Controllers
 
             string Id = "";
 
-
-
-
-
-            foreach (var sus in _context.Suspects.ToList() )
+            var cases = _context.Managers.ToList();
+            if(cases.Count()<=0 && viewName=="DashboardView")
             {
-               if(sus.SuspectNo == suspectNo)
-                {
-                    Id = sus.SuspectID;
-
-                }
+                return RedirectToAction(""+viewName, new { availableManagers = "No Managers Available to create a case" });
             }
+            else if(cases.Count()<=0 && viewName== "ShowSuspects")
+            {
+                return RedirectToAction(viewName, new { availableManagers ="No managers available" });
+            }
+
+
+                foreach (var sus in _context.Suspects.ToList())
+                {
+                    if (sus.SuspectNo == suspectNo)
+                    {
+                        Id = sus.SuspectID;
+
+                    }
+                }
 
 
             TempData["IDNumber"]= Id;
@@ -265,10 +278,15 @@ namespace CriminalProject.Controllers
 
         //Show Suspects
         [HttpGet]
-        public IActionResult ShowSuspects()
+        public IActionResult ShowSuspects(string availableManagers)
         {
             List<Suspects> suspects = _context.Suspects.ToList();
             List <CriminalRecords> criminals = _context.CriminalRecord.ToList();
+
+            if (availableManagers != null)
+            {
+                TempData["ErrorMessage"] = "No Managers Available to create a case";
+            }
 
             foreach (var sus in suspects)
             {

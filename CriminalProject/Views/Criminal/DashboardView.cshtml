@@ -147,7 +147,9 @@
                  @if(Model!=null)
                  {
                     <div>
-                        <a asp-controller="Criminal" asp-action="CriminalRecordView" asp-route-SuspectNo="@Model.Suspects.SuspectNo" class="btn btn-primary glassBackground" style="width:fit-content">Create Criminal Record</a>
+                        <a asp-controller="Criminal" asp-action="CriminalRecordView"
+                                   asp-route-SuspectNo="@Model.Suspects.SuspectNo" asp-route-viewName="DashboardView"
+                                   class="btn btn-primary glassBackground" style="width:fit-content">Create Criminal Record</a>
 
                     </div>
                  }

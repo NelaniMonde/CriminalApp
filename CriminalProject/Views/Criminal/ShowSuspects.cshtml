@@ -4,6 +4,17 @@
 <body>
  <h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%; margin-bottom:5%;">Showing suspects</h1>
 
+    @if (@TempData["ErrorMessage"]==null) @* this checks if the model is not null *@
+    {
+        @*if the model is not null meaning the correlating id was found then hide the warning*@
+        <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p>
+    }
+    else
+    {
+        @*otherwise show the warning*@
+        <p class="text-danger glassBackground fw-bold" style="width:fit-content;">@TempData["ErrorMessage"]</p>
+    }
+
 
     <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground p-3" >
 <table class="table-bordered border-secondary text-white">
@@ -28,7 +39,9 @@
                 <td>@item.CriminalRecords.Count()</td>
                 <td>
                     <div>
-                      <a asp-controller="Criminal" asp-action="CriminalRecordView" asp-route-SuspectNo="@item.SuspectNo" class="btn btn-primary glassBackground" style="width:200px">Create Criminal Record</a>
+                      <a asp-controller="Criminal" asp-action="CriminalRecordView"
+                                       asp-route-SuspectNo="@item.SuspectNo" asp-route-ViewName="ShowSuspects"
+                                       class="btn btn-primary glassBackground" style="width:200px">Create Criminal Record</a>
                     </div>
                 </td>
                 </tr>
@@ -43,7 +56,9 @@
                     <td>0</td>
                     <td>
                         <div>
-                            <a asp-controller="Criminal" asp-action="CriminalRecordView" asp-route-SuspectNo="@item.SuspectNo" class="btn btn-primary glassBackground" style="width:200px">Create Criminal Record</a>
+                            <a asp-controller="Criminal" asp-action="CriminalRecordView"
+                                       asp-route-ViewName="ShowSuspects"
+                            asp-route-SuspectNo="@item.SuspectNo" class="btn btn-primary glassBackground" style="width:200px">Create Criminal Record</a>
                         </div>
                     </td>
                 </tr>

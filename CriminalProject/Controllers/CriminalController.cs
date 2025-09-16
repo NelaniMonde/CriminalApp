@@ -394,10 +394,17 @@ namespace CriminalProject.Controllers
             //   ManagerNo = _context.Managers.FirstOrDefault().ManagerNo;
             
                 matchingManager = managers.OrderBy(manager => manager.Criminals == null ? 0 : manager.Criminals.Count()).FirstOrDefault();
-                //matchingManager = managers.FirstOrDefault(manager => manager.Criminals == null || manager.Criminals.Count() <= 4);
+            //matchingManager = managers.FirstOrDefault(manager => manager.Criminals == null || manager.Criminals.Count() <= 4);
 
+
+            if (matchingManager == null)
+            {
+                TempData["NoManagerWarning"] = "No Manager Exisits in the database";
+            }
+            else
+            {
                 ManagerNo = matchingManager.ManagerNo;
-
+            }
             _userActivityLogger.LogUserActivity(User.Identity.Name, "Automated A Manager");
 
             return ManagerNo;

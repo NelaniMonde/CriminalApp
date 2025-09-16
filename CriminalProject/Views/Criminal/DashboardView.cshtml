@@ -28,8 +28,8 @@
     <div class="row">
 
         <!--Column 1-->
-        <div class="col-sm glassBackground">
-            <div class="input-group mb-3">
+        <div class="col-sm glassBackground" style="width:fit-content;">
+            <div class="input-group mb-3" style="margin-left:15%; margin-top:3%; width:fit-content;">
                 <form role="search" method="post" asp-controller="Criminal" asp-action="DashboardView">
                 <input type="text" id="textInputlabel" class="form-control glassBackground text-black" placeholder="Search by ID" name="SusID" />
                 <button class="btn btn-primary glassBackground" style="margin-top:1%;" type="submit">Search ID</button>
@@ -37,9 +37,9 @@
             </div>
 
     <br /><br />
-    <div class="text-white">
+    <div class="text-white" >
     @if(Model != null)
-    {  <table >
+    {  <table style="margin-left:15%; width:fit-content;"  >
         <thead>
             <tr>
             <th></th>
@@ -71,10 +71,10 @@
     </div>
     <br/><br/><br/><br/>
 
-<div class="row">
+<div class="row" >
 
      <a asp-controller="Criminal" asp-action="UpdateSuspect" asp-route-id="@TempData["FoundSusNo"]" id="ShowAccepted" type="submit" class="btn btn-primary glassBackground" 
-                style="width:fit-content; margin-left:2%;">Edit Suspect</a>
+                style="width:fit-content; margin-left:15%; margin-bottom:10%;">Edit Suspect</a>
                 
 </div>
 </div><!--end of Column1-->
@@ -89,7 +89,7 @@
                 <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground  p-3">
                     @if (Model != null)
                     {
-                        <table id="MainTable" class="table table-bordered border-dark text-white" >
+                        <table id="MainTable" class="table table-bordered border-secondary text-white" >
                             <thead>
                                 <tr>
                                     <th>Record ID</th>
@@ -122,7 +122,7 @@
                                             <td> @obj.IssuedBy</td>
                                             <td>@obj.DateIssued.ToShortDateString()</td>
                                             <td>
-                                                <a asp-controller="Criminal" asp-action="UpdateCriminal" asp-route-id="@obj.CriminalRecordId" id="ShowAccepted" type="submit" class="btn btn-primary" style="width:150px">Edit</a>
+                                                <a asp-controller="Criminal" asp-action="UpdateCriminal" asp-route-id="@obj.CriminalRecordId" id="ShowAccepted" type="submit" class="btn btn-primary glassBackground" style="width:150px">Edit</a>
                                             </td>
                                         </tr>
                                     }

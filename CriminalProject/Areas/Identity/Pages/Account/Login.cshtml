@@ -5,12 +5,22 @@
     ViewData["Title"] = "Log in";
 }
 
+<div class="card glassBackground border-0 mt-4">
+    <div class="card-header  ml-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class=" text-white">Login</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 @* <h1 class="text-white">@ViewData["Title"]</h1> *@
 <div class="row">
     <div class="col-md-8">
         <section>
             <form id="account" method="post" class="glassBackground" style="margin-left:45%; margin-top:8%">
-                <h2 class="text-white">Use a local account to log in.</h2>
+                <h2 class="text-white" style="margin-left:6%;"> Enter Account Details.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">

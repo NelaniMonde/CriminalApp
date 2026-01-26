@@ -1,19 +1,13 @@
 ﻿@model List<Suspects>
 
-
+<partial name="_Notifications" />
 <body>
  <h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%; margin-bottom:5%;">Showing suspects</h1>
 
-    @if (@TempData["ErrorMessage"]==null) @* this checks if the model is not null *@
-    {
-        @*if the model is not null meaning the correlating id was found then hide the warning*@
-        <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p>
-    }
-    else
-    {
-        @*otherwise show the warning*@
-        <p class="text-danger glassBackground fw-bold" style="width:fit-content;">@TempData["ErrorMessage"]</p>
-    }
+   
+      
+    
+    
 
 
     <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground p-3" >

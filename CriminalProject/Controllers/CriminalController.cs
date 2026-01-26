@@ -24,13 +24,13 @@ namespace CriminalProject.Controllers
 
 
         //Dashboard View
-        public IActionResult DashboardView(string availableManagers)
+        public IActionResult DashboardView(string availableManagers, string successMessage)
         {
             if (availableManagers != null)
             {
-                TempData["ErrorMessage"] = "No Managers Available to create a case";
+                TempData["Error"] = availableManagers;
             }
-
+            TempData["Success"] = successMessage;
             return View();
         }
 
@@ -89,25 +89,13 @@ namespace CriminalProject.Controllers
             }
             else
             {
-                TempData["ErrorMessage"] = "Suspect Not found";
+                TempData["Error"] = "Suspect Not found";
                 return RedirectToAction("DashboardView");
             }
             
             
             //return View();
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -138,10 +126,12 @@ namespace CriminalProject.Controllers
 
             _userActivityLogger.LogUserActivity(User.Identity.Name, "Added a Suspect whose ID Number is:  " + suspObject.SuspectID + 
                 "  and Name is:  " + suspObject.FirstName);
+            TempData["Success"] = "A Suspect whose ID Number is:  " + suspObject.SuspectID +
+                "  and Name is:  " + suspObject.FirstName+" was added successfully!!!";
 
             return RedirectToAction("DashboardView");
 
-            return View();
+          //  return View();
         }
 
         //Criminal Record view
@@ -213,9 +203,11 @@ namespace CriminalProject.Controllers
             _userActivityLogger.LogUserActivity(User.Identity.Name, "Added a Criminal record :  "+ criminalRecords.Offences +
               " for a suspect whose ID Number Is:  " + suspect.SuspectID+ " Suspect Name is: "+suspect.FirstName);
 
+            var crimSuccessMessage = "Criminal Reccord: " + criminalRecords.Offences +
+                " Added Successfully for Suspect: " + suspect.FirstName;
             //AutoAllocation();
-            return RedirectToAction("ShowSuspects");
-            return View();
+            return RedirectToAction("ShowSuspects", new { addedCriminalRec =crimSuccessMessage});
+           // return View();
         }
 
 
@@ -235,8 +227,20 @@ namespace CriminalProject.Controllers
             _context.Suspects.Update(suspecs);
             _context.SaveChanges();
 
-            _userActivityLogger.LogUserActivity(User.Identity.Name, "Updated Suspect Details whose name is:  " + suspecs.FirstName +
-            " and whose ID Number Is:  " + suspecs.SuspectID);
+            if (User.Identity != null)
+            {
+                if(User.Identity.Name!=null)
+                { 
+                _userActivityLogger.LogUserActivity(User.Identity.Name, "Updated Suspect Details whose name is:  "
+                    + suspecs.FirstName +
+                " and whose ID Number Is:  " + suspecs.SuspectID);
+            } }
+
+
+
+            TempData["Success"] = "Suspect Details whose name is: " + suspecs.FirstName + 
+                " and whose ID Number Is:  " + suspecs.SuspectID
+                + " has been updated successfully";
 
             return RedirectToAction("DashboardView");
             return View(suspecs);
@@ -267,10 +271,11 @@ namespace CriminalProject.Controllers
             _context.CriminalRecord.Update(recs);
             _context.SaveChanges();
 
+            var message = "Criminal record for Suspect: " + suspect.FirstName + " has been updated";
 
 
-          
-            return RedirectToAction("DashboardView");
+
+            return RedirectToAction("DashboardView", new { successMessage =message});
             return View(recs);
 
        
@@ -278,14 +283,14 @@ namespace CriminalProject.Controllers
 
         //Show Suspects
         [HttpGet]
-        public IActionResult ShowSuspects(string availableManagers)
+        public IActionResult ShowSuspects(string availableManagers,string addedCriminalRec)
         {
             List<Suspects> suspects = _context.Suspects.ToList();
             List <CriminalRecords> criminals = _context.CriminalRecord.ToList();
 
             if (availableManagers != null)
             {
-                TempData["ErrorMessage"] = "No Managers Available to create a case";
+                TempData["Error"] = "No Managers Available to create a case";
             }
 
             foreach (var sus in suspects)
@@ -302,6 +307,8 @@ namespace CriminalProject.Controllers
                 }
 
             }
+
+            TempData["Success"] = addedCriminalRec;
             _userActivityLogger.LogUserActivity(User.Identity.Name, "Viewed All Suspects");
 
             return View(suspects);
@@ -323,9 +330,13 @@ namespace CriminalProject.Controllers
             _context.SaveChanges();
 
 
-            _userActivityLogger.LogUserActivity(User.Identity.Name, "Added a Manager whose ID Number Is:  " + manager.ManagerID + " Whose Name is: " + manager.Name);
+            _userActivityLogger.LogUserActivity(User.Identity.Name, "Added a Manager whose ID Number Is:  " 
+                + manager.ManagerID + " Whose Name is: " + manager.Name);
 
-            ModelState.Clear();
+            TempData["Success"] = "A Manager whose ID Number Is: " + manager.ManagerID +
+                " Whose Name is: " + manager.Name + " has been added Successfully!!!";
+            
+                ModelState.Clear();
             return View();
         }
 

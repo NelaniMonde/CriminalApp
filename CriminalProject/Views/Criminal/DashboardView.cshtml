@@ -1,17 +1,24 @@
 ﻿@model SuspectsNCrimininal
 
-<body>
+
+@if (searchPressed() == true) @* this checks if the model is not null *@
+{
+    @*if the model is not null meaning the correlating id was found then hide the warning*@
+    @*  <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p> *@
+
+    <partial name="_Notifications" />
+}
+else
+{
+    @*otherwise show the warning*@
+
+    TempData["Error"] = "Suspect Not Found";
+    <partial name="_Notifications" />
+}
+
+
 <h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
-    @if (searchPressed() == true) @* this checks if the model is not null *@
-    {
-        @*if the model is not null meaning the correlating id was found then hide the warning*@
-        <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p>
-    }
-    else
-    {
-        @*otherwise show the warning*@
-        <p class="text-danger glassBackground fw-bold"  style="width:fit-content;">@TempData["ErrorMessage"]</p>
-    }
+  
     <br/><br/>
 
 
@@ -165,7 +172,16 @@
 </div> 
 </div>
 </div>
-</body>
+
+
+@* 
+@section Scripts
+    {
+    @{
+        <partial name="_Notifications" />
+    }
+
+} *@
 
 
      

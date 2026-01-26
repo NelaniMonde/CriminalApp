@@ -186,6 +186,7 @@ namespace CriminalProject.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        TempData["Success"] = "User added Successfully";
                         return LocalRedirect(returnUrl);
                     }
                 }

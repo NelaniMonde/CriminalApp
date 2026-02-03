@@ -30,8 +30,17 @@ namespace CriminalProject.Controllers
             {
                 TempData["Error"] = availableManagers;
             }
-            TempData["Success"] = successMessage;
-            return View();
+            
+
+            if (successMessage == "No Suspect")
+            {
+                TempData["Error"] = "No Suspect found";
+            }
+            else
+            {
+                TempData["Success"] = successMessage;
+            }
+                return View();
         }
 
 
@@ -44,14 +53,20 @@ namespace CriminalProject.Controllers
 
             var suspects = _context.Suspects.ToList();
             var singleValue = 0;
+            var message = "";
 
-            
+
+
             foreach (var sus in suspects)
             {
-                if (sus.SuspectID.Contains(SusID))
+                if (SusID != null)
                 {
-                    singleValue = sus.SuspectNo;
+                    if (sus.SuspectID.Contains(SusID))
+                    {
+                        singleValue = sus.SuspectNo;
+                    }
                 }
+                
                 
             }
 
@@ -89,8 +104,8 @@ namespace CriminalProject.Controllers
             }
             else
             {
-                TempData["Error"] = "Suspect Not found";
-                return RedirectToAction("DashboardView");
+                 message = "No Suspect";
+                return RedirectToAction("DashboardView",new { successMessage =message});
             }
             
             
@@ -276,7 +291,7 @@ namespace CriminalProject.Controllers
 
 
             return RedirectToAction("DashboardView", new { successMessage =message});
-            return View(recs);
+            
 
        
         }
@@ -415,16 +430,9 @@ namespace CriminalProject.Controllers
 
             }
 
+                   
+           matchingManager = managers.OrderBy(manager => manager.Criminals == null ? 0 : manager.Criminals.Count()).FirstOrDefault();
        
-
-          //  var firstCriminalWithManagerNoZero = criminalList.FirstOrDefault(criminal => criminal.ManagerNoForeign == 0);
-
-           
-            //   ManagerNo = _context.Managers.FirstOrDefault().ManagerNo;
-            
-                matchingManager = managers.OrderBy(manager => manager.Criminals == null ? 0 : manager.Criminals.Count()).FirstOrDefault();
-            //matchingManager = managers.FirstOrDefault(manager => manager.Criminals == null || manager.Criminals.Count() <= 4);
-
 
             if (matchingManager == null)
             {

@@ -12,7 +12,7 @@ else
 {
     @*otherwise show the warning*@
 
-    TempData["Error"] = "Suspect Not Found";
+   
     <partial name="_Notifications" />
 }
 
@@ -38,7 +38,7 @@ else
         <div class="col-sm glassBackground" style="width:fit-content;">
             <div class="input-group mb-3" style="margin-left:15%; margin-top:3%; width:fit-content;">
                 <form role="search" method="post" asp-controller="Criminal" asp-action="DashboardView">
-                <input type="text" id="textInputlabel" class="form-control glassBackground text-black" placeholder="Search by ID" name="SusID" />
+                <input type="text" id="textInputlabel" class="form-control glassBackground text-black" required placeholder="Search by ID" name="SusID" />
                 <button class="btn btn-primary glassBackground" style="margin-top:1%;" type="submit">Search ID</button>
                 </form>
             </div>
@@ -70,11 +70,7 @@ else
     </tr>
     </table>
      }
-         else if(searchPressed())
-                {
-                    <h1>Welcome To The Criminal Dashboard</h1>
-                    <p class="text-danger" >Suspect Not Found</p>
-                }
+        
     </div>
     <br/><br/><br/><br/>
 

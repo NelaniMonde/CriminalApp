@@ -1,20 +1,8 @@
 ﻿@model SuspectsNCrimininal
 
 
-@if (searchPressed() == true) @* this checks if the model is not null *@
-{
-    @*if the model is not null meaning the correlating id was found then hide the warning*@
-    @*  <p class="text-danger glassBackground fw-bold" hidden style="width:fit-content;">@TempData["ErrorMessage"]</p> *@
 
     <partial name="_Notifications" />
-}
-else
-{
-    @*otherwise show the warning*@
-
-   
-    <partial name="_Notifications" />
-}
 
 
 <h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
@@ -22,13 +10,7 @@ else
     <br/><br/>
 
 
-@functions
-{
-    private bool searchPressed()
-    {
-        return Model != null;
-    }
-}
+
 
 <!--Main Container-->
 <div class="container">

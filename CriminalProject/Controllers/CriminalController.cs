@@ -141,10 +141,10 @@ namespace CriminalProject.Controllers
 
             _userActivityLogger.LogUserActivity(User.Identity.Name, "Added a Suspect whose ID Number is:  " + suspObject.SuspectID + 
                 "  and Name is:  " + suspObject.FirstName);
-            TempData["Success"] = "A Suspect whose ID Number is:  " + suspObject.SuspectID +
+            var message = "A Suspect whose ID Number is:  " + suspObject.SuspectID +
                 "  and Name is:  " + suspObject.FirstName+" was added successfully!!!";
 
-            return RedirectToAction("DashboardView");
+            return RedirectToAction("DashboardView", new { successMessage =message});
 
           //  return View();
         }

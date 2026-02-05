@@ -131,7 +131,7 @@ namespace CriminalProject.Areas.Identity.Pages.Account
                 {
                     Text=i,
                     Value=i
-                })
+                }).Where(i=> i.Value!="Admin")
             };
 
 

@@ -4,8 +4,8 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
-<div class="card glassBackground border-0 mt-4">
+<br/><br/><br/>
+<div class="card glassBackground border-0 mt-4 login-shift"   >
     <div class="card-header  ml-0 py-4">
         <div class="row">
             <div class="col-12 text-center">
@@ -16,7 +16,7 @@
 </div>
 
 @* <h1 class="text-white">@ViewData["Title"]</h1> *@
-<div class="row">
+<div class="row leftShift">
     <div class="col-md-8">
         <section>
             <form id="account" method="post" class="glassBackground" style="margin-left:45%; margin-top:8%">
@@ -61,4 +61,7 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/js/site.js"></script>
+    
 }

@@ -5,7 +5,7 @@
     <partial name="_Notifications" />
 
 
-<h1 class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
+<h1 id="crimID" class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
   
     <br/><br/>
 
@@ -13,12 +13,12 @@
 
 
 <!--Main Container-->
-<div class="container">
+<div class="container ">
     <div class="row">
 
-        <!--Column 1-->
-        <div class="col-sm glassBackground" style="width:fit-content;">
-            <div class="input-group mb-3" style="margin-left:15%; margin-top:3%; width:fit-content;">
+    <!--Column 1-->
+    <div class="col-sm-4 glassBackground  shiftSearchContainer " style="width:279.8px;">
+            <div class="input-group mb-3 mt-3"  >
                 <form role="search" method="post" asp-controller="Criminal" asp-action="DashboardView">
                 <input type="text" id="textInputlabel" class="form-control glassBackground text-black" required placeholder="Search by ID" name="SusID" />
                 <button class="btn btn-primary glassBackground" style="margin-top:1%;" type="submit">Search ID</button>
@@ -26,9 +26,9 @@
             </div>
 
     <br /><br />
-    <div class="text-white" >
+            <div class="text-white OneColumntable mt-4">
     @if(Model != null)
-    {  <table style="margin-left:15%; width:fit-content;"  >
+    {  <table class="w-75" style="padding-left:10px;"   >
         <thead>
             <tr>
             <th></th>
@@ -36,7 +36,7 @@
             <tr>
             </thead>
             <tbody>
-        <tr>
+      <tr >
         <td >
            Suspect No:  <br /><br />
            Suspect ID:  <br /><br />
@@ -56,7 +56,7 @@
     </div>
     <br/><br/><br/><br/>
 
-<div class="row" >
+<div class="mt-4" >
 
      <a asp-controller="Criminal" asp-action="UpdateSuspect" asp-route-id="@TempData["FoundSusNo"]" id="ShowAccepted" type="submit" class="btn btn-primary glassBackground" 
                 style="width:fit-content; margin-left:15%; margin-bottom:10%;">Edit Suspect</a>
@@ -64,17 +64,20 @@
 </div>
 </div><!--end of Column1-->
 
+        
 <!--column 2-->
-<div class="col-sm" style="margin-left:2%;">
+<div class="table-responsive">
+ <div class="col-md-8 mt-4 mt-md-0" >
+                <br /><br />
     <div>
-        <h2 class="align-self-center text-white glassBackground" style="width:fit-content;">Criminal Records</h2>
+                <h2 class="text-white glassBackground  d-inline-block px-1 py-2">Criminal Records</h2>
     </div>
-    <br/><br/>
+                
             <div >
-                <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground  p-3">
+                <div class="card rounded-3 border p-3 mt-5 glassBackground">
                     @if (Model != null)
                     {
-                        <table id="MainTable" class="table table-bordered border-secondary text-white" >
+                        <table id="MainTable" class="table table-bordered border-secondary text-white">
                             <thead>
                                 <tr>
                                     <th>Record ID</th>
@@ -107,7 +110,11 @@
                                             <td> @obj.IssuedBy</td>
                                             <td>@obj.DateIssued.ToShortDateString()</td>
                                             <td>
-                                                <a asp-controller="Criminal" asp-action="UpdateCriminal" asp-route-id="@obj.CriminalRecordId" id="ShowAccepted" type="submit" class="btn btn-primary glassBackground" style="width:150px">Edit</a>
+                                                <a asp-controller="Criminal" 
+                                                asp-action="UpdateCriminal" 
+                                                asp-route-id="@obj.CriminalRecordId" 
+                                                id="ShowAccepted"
+                                                   type="submit" class="btn btn-primary glassBackground btn-sm">Edit</a>
                                             </td>
                                         </tr>
                                     }
@@ -119,10 +126,7 @@
                            
                         </table>
                     }
-                    @* else if (searchPressed())
-                    {
-                      <p>No Criminal Records Found</p>
-                    } *@
+                   
                     else if (!string.IsNullOrEmpty(Context.Request.Query["suspectId"]))
                     {
                         <p>No records found for Suspect ID: @Context.Request.Query["suspectId"]</p>
@@ -147,19 +151,24 @@
             
 
     </div>
-</div> 
+</div>
+        </div>
+<!--end of column 2-->
+
 </div>
 </div>
 
 
-@* 
-@section Scripts
-    {
-    @{
-        <partial name="_Notifications" />
-    }
+@section Scripts {
+    <script>
+            $(document).ready( function () {
+                $('#MainTable').DataTable();
 
-} *@
+
+                    // $('.dataTables_filter input').addClass('glassBackground');
+        } );
+    </script>
+}
 
 
      

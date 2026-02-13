@@ -103,7 +103,7 @@ body {
         margin-top:100%;
     }
 */
-/*login editing start*/
+/*login/registration editing start*/
 
     .leftShift {
         margin-left: -180px;
@@ -111,11 +111,34 @@ body {
         /* adjust to your needed spacing */
         /*transition: margin-top 0.3s ease;*/
     }
+/*login/registration editing end*/
+
+ /*Dashboard editing start*/
+
+    .shiftSearchContainer {
+        padding: 25px;
+    }
+
+ .OneColumntable
+ {
+     
+     width:100%;
+ }
+
+ .OneColumnTableCont table
+ {
+     padding-right:20px;
+ }
+
+    .OneColumntable td {
+        padding-bottom: 15px;
+    }
+
+ /*Dashboard editing end*/
 
 
-/*login editing end*/
 
-
+ /*Nav editing start*/
     .nav-menu {
         position: absolute;
         top: 60px;
@@ -140,8 +163,9 @@ body {
             display: flex;
            
         }
-}
+  /*Nav editing end*/
 
+}
 /* Responsive Nav Bar end*/
 
 

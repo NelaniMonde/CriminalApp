@@ -5,7 +5,7 @@
     <partial name="_Notifications" />
 
 
-<h1 id="crimID" class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Criminal Dashboard</h1>
+<h1 id="dashBoardView" class="text-white glassBackground" style="width:fit-content; margin-top:8%;">Welcome To The Suspect & Criminal Dashboard</h1>
   
     <br/><br/>
 
@@ -74,7 +74,7 @@
     </div>
                 
             <div >
-                <div class="card rounded-3 border p-3 mt-5 glassBackground">
+                <div class="card rounded-3 border p-3 mt-5 glassBackground" style="width:900px;">
                     @if (Model != null)
                     {
                         <table id="MainTable" class="table table-bordered border-secondary text-white">
@@ -101,7 +101,7 @@
                                     {
 
 
-                                        <tr class="text-black">
+                                        <tr class="text-white">
                                             <td>@obj.CriminalRecordId</td>
                                             <td>@Model.Suspects.SuspectNo</td>
                                             <td>@obj.Offences</td>

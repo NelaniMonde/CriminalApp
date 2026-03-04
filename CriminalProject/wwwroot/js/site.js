@@ -57,7 +57,7 @@ toggleBtn.addEventListener("click", () => {
 
     if (updateSuspectView != null)
     {
-        updateCriminalRecView.style.marginTop = '259px';
+        updateSuspectView.style.marginTop = '259px';
     }
 
     //doing a count for when the nav button is clicked once more
@@ -97,7 +97,7 @@ toggleBtn.addEventListener("click", () => {
         }
 
         if (updateSuspectView != null) {
-            updateCriminalRecView.style.marginTop = '8%';
+            updateSuspectView.style.marginTop = '8%';
         }
         
         count = 0;

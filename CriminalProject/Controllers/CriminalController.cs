@@ -231,11 +231,16 @@ namespace CriminalProject.Controllers
         public IActionResult UpdateSuspect(int id)
         {
             var suspect = _context.Suspects.Find(id);
+            if(suspect==null)
+            {
+                TempData["Error"] = "Suspect not found!!!";
+            }
+
             return View(suspect);
         }
 
         //update Suspect View Action
-        //get
+        //post
         [HttpPost]
         public IActionResult UpdateSuspect(Suspects suspecs)
         {
@@ -258,7 +263,7 @@ namespace CriminalProject.Controllers
                 + " has been updated successfully";
 
             return RedirectToAction("DashboardView");
-            return View(suspecs);
+            
         }
 
         

@@ -74,7 +74,7 @@
     </div>
                 
             <div >
-                <div class="card rounded-3 border p-3 mt-5 glassBackground" style="width:900px;">
+                <div id="tableContainer" class="card rounded-3 border p-3 mt-5 glassBackground horizScroll" style="width:900px; ">
                     @if (Model != null)
                     {
                         <table id="MainTable" class="table table-bordered border-secondary text-white">
@@ -162,7 +162,27 @@
 @section Scripts {
     <script>
             $(document).ready( function () {
-                $('#MainTable').DataTable();
+                $('#MainTable').DataTable(
+                    {
+                       'responsive':true
+               
+                    });
+
+                            // Labels ("Search:", "Show X entries")
+        // $('.dt-container .dt-search label').css('color', 'white');
+        // $('.dt-container .dt-length label').css('color', 'white');
+
+        // // Length dropdown (selected value + options)
+        // $('.dt-container .dt-length select.dt-input').css('color', 'white');
+
+
+        //         // Info text ("Showing 1 to 10 of ...")
+         $('.dt-container .dt-info').css('color', 'white');
+
+
+
+
+
 
 
                     // $('.dataTables_filter input').addClass('glassBackground');

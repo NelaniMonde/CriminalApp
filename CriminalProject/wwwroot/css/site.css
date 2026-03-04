@@ -28,6 +28,28 @@ body {
 
 
 
+/*Data table editing start*/
+.dt-container label,
+.dt-container .dt-search label,
+.dt-container .dt-length label,
+.dt-container .dt-info label,
+.dt-container .dt-length select.dt-input {
+    color: white;
+}
+
+
+/*Data table editing end*/
+
+
+
+
+
+
+
+
+
+
+
 
 /*Responsive Nav Bar start */
 
@@ -70,6 +92,11 @@ body {
 
 @media (max-width: 768px) 
 {
+    .horizScroll
+    {
+        overflow-x:scroll;
+    }
+   
 
     .nav-toggle {
         display: block;

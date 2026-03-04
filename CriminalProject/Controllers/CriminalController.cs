@@ -268,9 +268,11 @@ namespace CriminalProject.Controllers
         //update Criminal Reord View Action
         //get
         [HttpGet]
-        public IActionResult UpdateCriminal(int id)
+        public IActionResult UpdateCriminal(int id , int suspectId)
         {
             var criminal = _context.CriminalRecord.Find(id);
+
+            TempData["IDNumber"] = suspectId;
 
             return View(criminal);
         }

@@ -1,7 +1,6 @@
 ﻿@model CriminalRecords
 
 @{
-
     //var susNo = TempData["suspectNo"];
     var susNo = TempData["FoundSusNo"];
     // TempData.Keep("suspectNo");
@@ -11,9 +10,9 @@
 }
 <body>
 <form id="updateCriminalRec" method="post" asp-action="UpdateCriminal">
-    <div class="card rounded-3 me-1g-n5 border p-3 mt-4 bg-blur bg-secondary bg-opacity-75">
+    <div class="card rounded-3 me-1g-n5 border p-3 mt-4 glassBackground text-white">
         <div class="row pb-2">
-            <h2 class="text-primary">Update Criminal Record</h2>
+            <h2 class="text-white">Update Criminal Record</h2>
 
             <hr />
         </div>
@@ -97,8 +96,9 @@
 
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a asp-controller="Criminal" asp-action="DashboardView" id="ShowAccepted" type="submit" class="btn btn-primary" style="width:200px">Back</a>
-            <button type="submit" class="btn btn-secondary" style="width:150px">Update Criminal Record</button>
+            <a asp-controller="Criminal" asp-action="DashboardView" id="ShowAccepted"
+                   type="submit" class="btn btn-primary glassBackground" style="width:100px">Back</a>
+                <button type="submit" class="btn btn-secondary glassBackground" style="width:200px">Update Criminal Record</button>
         </div>
     </div>
 

@@ -2,8 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // elements and button variables 
+//Nav variables declarations
 const toggleBtn = document.getElementById("navToggle");
 const menu = document.getElementById("navMenu");
+
+//View variables declarations
 const indexText = document.getElementById("indexDisplayText");
 const suspectView = document.getElementById("addSuspectView");
 const managerView = document.getElementById("addManagerView");
@@ -104,6 +107,7 @@ toggleBtn.addEventListener("click", () => {
     }
     
 });
+//Nav toggler listener end 
 
 
    

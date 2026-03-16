@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace CriminalProject.Areas.Identity.Pages.Account
 {
@@ -55,8 +56,9 @@ namespace CriminalProject.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        //We created an instance 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel Input { get; set; } = new InputModel();
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -105,13 +107,38 @@ namespace CriminalProject.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
 
-            public string? Role { get; set; }
+            public string Role { get; set; }
             
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
 
+        //Repopulating the role list after reloading
+        public async Task ReloadRoleList() 
+        {
+            /*
+             * Alternative way of loading the list
+             */
 
+            var roles = await _roleManager.Roles
+          .Select(r => r.Name)
+          .Where(name => name != "Admin")
+          .ToListAsync();
+
+            Input.RoleList = roles.Select(name => new SelectListItem
+            {
+                Value = name,
+                Text = name
+            }).ToList();   // ToList() is safer
+
+
+
+
+        }
+
+
+
+        //On get async 
         public async Task OnGetAsync(string returnUrl = null)
         {
             if(!_roleManager.RoleExistsAsync(SD.Role_User_NormalUser).GetAwaiter().GetResult()) 
@@ -125,15 +152,15 @@ namespace CriminalProject.Areas.Identity.Pages.Account
 
 
             //Populating the role
-            Input = new()
-            {
-                RoleList = _roleManager.Roles.Select(x=>x.Name).Select(i=>new SelectListItem
-                {
-                    Text=i,
-                    Value=i
-                }).Where(i=> i.Value!="Admin")
-            };
-
+            //Input = new()
+            //{
+            //    RoleList = _roleManager.Roles.Select(x=>x.Name).Select(i=>new SelectListItem
+            //    {
+            //        Text=i,
+            //        Value=i
+            //    }).Where(i=> i.Value!="Admin")
+            //};
+           await ReloadRoleList();
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -143,6 +170,9 @@ namespace CriminalProject.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            await ReloadRoleList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();

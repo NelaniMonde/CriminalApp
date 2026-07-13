@@ -10,7 +10,7 @@
 
     <!-- for adding to the class incase there is an error (me-1g-n5)  -->
 
-    <div class="card rounded-3  border p-3 mt-5 glassBackground horizScroll" style="width:900px; ">
+    <div class="card rounded-3  border p-3 mt-5 glassBackground horizScroll" style="width:100%; ">
 <table id="MainTable" class="table-bordered border-secondary text-white">
     <thead>
         <tr>
@@ -69,7 +69,11 @@
             $(document).ready( function () {
                 $('#MainTable').DataTable(
                     {
-                         'responsive':true
+                         'responsive':true,
+                           columnDefs: [
+                        { responsivePriority: 1, targets: 1 },
+                        {  responsivePriority: -1, targets: 4 } 
+                        ]
                     });
 
                     // Info text ("Showing 1 to 10 of ...")

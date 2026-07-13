@@ -362,7 +362,7 @@ namespace CriminalProject.Controllers
             return View();
         }
 
-
+        //Show Managers and cases view
         public IActionResult viewCases() 
         {
 
